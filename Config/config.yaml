@@ -1,0 +1,7 @@
+headless: true
+trip_list:
+  - BRU_EZE
+  - BRU_TYO
+  - EZE_BRU
+waiting_time: 3
+max_retries: 2
