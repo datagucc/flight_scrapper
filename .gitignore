@@ -1,3 +1,5 @@
-/Data/raw/screenshots
+/Data
 /Exploration
 /flight_env
+/Scripts/pipeline/creating_tables.ipynb
+/Scripts/pipeline/gold_layer.py

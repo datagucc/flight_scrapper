@@ -19,7 +19,7 @@ Image_SIZE= {
 
 PATH = {
     'screenshot_path':'/Users/focus_profond/GIT_repo/flight_price_tracker/Data/raw/screenshots'
-    ,'log_path':'/Users/focus_profond/GIT_repo/flight_price_tracker/Logs/'
+    ,'log_path':'/Users/focus_profond/GIT_repo/flight_price_tracker/Logs'
 
 }
 

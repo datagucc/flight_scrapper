@@ -124,7 +124,7 @@ def ocr_individual_cells(image_path, image_name,rows=6, cols=7, config='--psm 6'
 """
 
 # Configuration basique du log (fichier, format, niveau)
-logging.basicConfig(filename='/Users/focus_profond/GIT_repo/flight_price_tracker/Logs/ocr_errors.log',
+logging.basicConfig(filename='/Users/focus_profond/GIT_repo/flight_price_tracker/Logs/OCR/ocr_errors.log',
                     filemode='a',
                     format='%(asctime)s - %(levelname)s - %(message)s',
                     level=logging.ERROR)
@@ -246,11 +246,12 @@ def ocr_on_folder(folder_path):
 #stocker le DF dans un fichier DeltaLake :
 #améliorer cette fonction pour qu'elle soit plus dynamique 
 #def storing_data(df, directory='/Users/focus_profond/GIT_repo/IDLE_CITY_PROJECT/Accessibility', source = 'screenshots', author = 'Augustin'):
-def storing_data(df, name_folder_desti='/Data/bronze/BigTable', source = 'screenshots', author = 'Augustin'):
+def storing_data(df, name_folder_desti="/Data/raw/BigTable", source = 'screenshots', author = 'Augustin'):
     
     main_directory = '/Users/focus_profond/GIT_repo/flight_price_tracker'
     os.chdir(main_directory)
     name_folder = main_directory+ name_folder_desti
+    print(name_folder)
     partition_cols = None
     predicate = "target.flight_date = source.flight_date AND target.trip = source.trip AND target.date_of_search = source.date_of_search"
 

@@ -1,0 +1,5 @@
+trip,date_scrapped,start_time,end_time,duration_sec,total_months,status,errors_count,errors,url
+BRU_EZE,2025-06-17,2025-06-17T17:50:05.953419,2025-06-17T17:50:32.712663,26.76,12,started,0,[],https://www.google.com/travel/flights?tfs=CBwQARodagwIAxIIL20vMDE3N3pyDQgCEgkvbS8wMWx5NW1AAUgBcAGCAQsI____________AZgBAg&tfu=KgIIAQ&curr=EUR
+BRU_EZE,2025-06-17,2025-06-17T17:53:05.809324,2025-06-17T17:54:52.259802,106.45,12,success,0,[],https://www.google.com/travel/flights?tfs=CBwQARodagwIAxIIL20vMDE3N3pyDQgCEgkvbS8wMWx5NW1AAUgBcAGCAQsI____________AZgBAg&tfu=KgIIAQ&curr=EUR
+EZE_BRU,2025-06-17,2025-06-17T17:54:52.260403,2025-06-17T17:56:44.736669,112.48,12,success,0,[],https://www.google.com/travel/flights?tfs=CBwQARodag0IAhIJL20vMDFseTVtcgwIAxIIL20vMDE3N3pAAUgBcAGCAQsI____________AZgBAg&tfu=KgIIAQ&curr=EUR
+BRU_GRU,2025-06-17,2025-06-17T17:56:44.737117,2025-06-17T17:58:31.374348,106.64,12,success,0,[],https://www.google.com/travel/flights?tfs=CBwQARodagwIAxIIL20vMDE3N3pyDQgDEgkvbS8wMjJwZm1AAUgBcAGCAQsI____________AZgBAg&tfu=KgIIAQ&curr=EUR
