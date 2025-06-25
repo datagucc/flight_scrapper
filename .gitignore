@@ -3,3 +3,7 @@
 /flight_env
 /Scripts/pipeline/creating_tables.ipynb
 /Scripts/pipeline/gold_layer.py
+/Config/pipeline.conf
+/Logs/Scrapping/Screenshots/
+documentation
+/Scripts/create_powerbi_user.sql

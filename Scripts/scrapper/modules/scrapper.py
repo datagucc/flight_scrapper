@@ -85,8 +85,8 @@ def click_departure_date(page: Page):
         page.wait_for_timeout(500 + int(600 * random.random()))
     except Exception as e:
         # Capture screenshot on failure to aid debugging
-        timestampstr = datetime.datetime.now().strftime('%Y-%m-%d %H_%M_S')
-        page.screenshot(path=f"/Users/focus_profond/GIT_repo/flight_price_tracker/Logs/Scrapping/Screenshots/debug_click_departure_{timestampstr}.png", full_page=True)
+        timestampstr = datetime.datetime.now().strftime('%Y-%m-%d %H_%M_%S')
+        page.screenshot(path=f"/Users/focus_profond/GIT_repo/flight_price_tracker/Logs/Scrapping/Screenshots_debug/debug_click_departure_{timestampstr}.png", full_page=True)
         print("[❌ Erreur] Impossible de cliquer sur le champ de date de départ.")
         raise e
 
@@ -128,7 +128,7 @@ def click_next_page(page: Page):
     except Exception as e:
         # Capture screenshot on failure to aid debugging
         timestampstr = datetime.datetime.now().strftime('%Y-%m-%d %H_%M_%S')
-        page.screenshot(path=f"/Users/focus_profond/GIT_repo/flight_price_tracker/Logs/Scrapping/Screenshots/debug_next_page_{timestampstr}.png", full_page=True)
+        page.screenshot(path=f"/Users/focus_profond/GIT_repo/flight_price_tracker/Logs/Scrapping/Screenshots_debug/debug_next_page_{timestampstr}.png", full_page=True)
         print("[❌ Erreur] Impossible de cliquer sur le bouton 'Next'.")
         raise e
 
@@ -174,7 +174,7 @@ def take_screenshot_ele(
 
     except Exception as e:
         timestampstr = datetime.datetime.now().strftime('%Y-%m-%d %H_%M_%S')
-        page.screenshot(path=f"/Users/focus_profond/GIT_repo/flight_price_tracker/Logs/Scrapping/Screenshots/debug_screenshot_{timestampstr}.png", full_page=True)
+        page.screenshot(path=f"/Users/focus_profond/GIT_repo/flight_price_tracker/Logs/Scrapping/Screenshots_debug/debug_screenshot_{timestampstr}.png", full_page=True)
         print(f"[❌ ERREUR] Échec de la capture pour {trip} → {name_image}: {e}")
         raise e
 
@@ -241,12 +241,31 @@ def scrapping_url(
         #move_mouse_randomly(page)
 
         #PHASE 3 : DATE PICKER : MAX 30 secondes d'attente 
+        is_second_try = False
         try:
             click_departure_date(page)
         except Exception as e:
             log_data["errors"].append({"phase":"click_departure_date","error":str(e)})
+            is_second_try = True
             raise
-    
+
+        # IL Y A SOUVENT UNE ERREUR A CE NIVEAU Là. IL POURRAIT ÊTRE INTERESSANT DE TENTER DE RELANCER LE GO TO URL OU LE BROWSER ET DE RETENTER LE DEPARTURE DATE.
+        # IL SE PEUT QU'EN RECHARGEANT LA PAGE OU EN RECHARGEANT LE BROWSER, CELA FONCTIONNE. On fait appel à nouveau aux memes fonctions.
+        if is_second_try:
+            try:
+                #we close the previous session
+                browser.close()
+                playwright.stop()
+                #we open a new session
+                playwright, browser, context, page = launch_browser(headless=headless)
+                #we go to the url again 
+                go_to_url(page, url)
+                #we go to the date picker
+                click_departure_date(page)
+            except Exception as e:
+                log_data["errors"].append({"phase":"second_click_departure_date","error":str(e)})
+                raise
+
         
         #PHASE 4 : MONTH LOOP : max 32 secondes par boucle, donc x12 = 360 secondes 
         for i in range(month_to_capture):

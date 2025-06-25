@@ -1,0 +1,49 @@
+0
+📌 Base utilisée : idle_city
+251308
+0
+new data inserted correctly.
+Query executed correctly
+Query executed correctly
+DB closed
+Traceback (most recent call last):
+  File "/Users/focus_profond/GIT_repo/flight_price_tracker/main_pipeline_auto.py", line 17, in <module>
+    logging.basicConfig(
+  File "/Users/focus_profond/anaconda3/lib/python3.12/logging/__init__.py", line 2118, in basicConfig
+    h = FileHandler(filename, mode,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/focus_profond/anaconda3/lib/python3.12/logging/__init__.py", line 1231, in __init__
+    StreamHandler.__init__(self, self._open())
+                                 ^^^^^^^^^^^^
+  File "/Users/focus_profond/anaconda3/lib/python3.12/logging/__init__.py", line 1263, in _open
+    return open_func(self.baseFilename, self.mode,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/focus_profond/GIT_repo/flight_price_tracker/Logs/Pipeline/schedule_pipeline/crontab_logs/cron_main_pipeline_2025-06-24 22h36.log'
+0
+📌 Base utilisée : idle_city
+251308
+0
+new data inserted correctly.
+Query executed correctly
+Query executed correctly
+DB closed
+▶️ Starting Bronze Layer...
+❌ An error occurred. Check the log for details.
+▶️ Starting Bronze Layer...
+✅ Bronze Layer completed.
+
+▶️ Starting Silver Layer...
+0
+✅ Silver Layer completed.
+
+▶️ Starting Gold Layer...
+📌 Base utilisée : idle_city
+251308
+0
+new data inserted correctly.
+Query executed correctly
+Query executed correctly
+DB closed
+✅ Gold Layer completed.
+
+🎉 All layers executed successfully.
