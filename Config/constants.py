@@ -2,7 +2,23 @@
 
 # scripts/constants.py
 
-# === SELECTORS ===
+# === PATH CONSTANTS
+main_path = '/Users/focus_profond/GIT_repo/flight_price_tracker'
+venv_envi_path = '/Users/focus_profond/GIT_repo/flight_price_tracker/flight_env/bin/python'
+plist_file_path = '/Users/focus_profond/Library/LaunchAgents/'
+PATH = {
+    'main_path':'/Users/focus_profond/GIT_repo/flight_price_tracker'
+    ,'logs_path':f'{main_path}/Logs'
+    ,'modules_path':f'{main_path}/Modules'
+    ,'data_path':f'{main_path}/Data'
+    ,'scripts_path':f'{main_path}/Scripts'
+    ,'config_path':f'{main_path}/Config'
+    ,'venv_envi_path':venv_envi_path
+    ,'plist_file_path': plist_file_path
+}
+
+# ==== SCRAPPING CONSTANTS ====
+
 SELECTORS = {
 
     'input_departure_label':'input[aria-label="Departure"]'
@@ -17,12 +33,18 @@ Image_SIZE= {
      ,'weight': '672'
     }
 
-PATH = {
-    'screenshot_path':'/Users/focus_profond/GIT_repo/flight_price_tracker/Data/raw/screenshots'
-    ,'log_path':'/Users/focus_profond/GIT_repo/flight_price_tracker/Logs'
+
+
+Context_browser ={
+'width':1920
+,'height':1080
+,'locale':'en-US'
+,'timezone_id':'America/Argentina/Buenos_Aires'
+,'geolocation_lat':-34.6037
+,'geolocation_lon':-58.3816
+,'accept-language': 'en-US,en;q=0.9'
 
 }
-
 USER_AGENT =  {
     # Liste de vrais User-Agents pour faire tourner aléatoirement
     'user1': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"

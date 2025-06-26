@@ -47,3 +47,21 @@ DB closed
 ✅ Gold Layer completed.
 
 🎉 All layers executed successfully.
+▶️ Starting Bronze Layer...
+✅ Bronze Layer completed.
+
+▶️ Starting Silver Layer...
+0
+✅ Silver Layer completed.
+
+▶️ Starting Gold Layer...
+📌 Base utilisée : idle_city
+251308
+0
+new data inserted correctly.
+Query executed correctly
+Query executed correctly
+DB closed
+✅ Gold Layer completed.
+
+🎉 All layers executed successfully.

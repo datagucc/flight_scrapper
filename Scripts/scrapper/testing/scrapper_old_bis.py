@@ -9,7 +9,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 from playwright.sync_api import Page
-from Scripts.scrapper.modules.utils import launch_browser, handle_cookies_popup, go_to_url
+from Modules.scrapping_utils import launch_browser, handle_cookies_popup, go_to_url
 from Config.constants import SELECTORS, SCREENSHOT_PATH
 
 

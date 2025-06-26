@@ -1,20 +1,12 @@
 # Generic utility functions for Playwright automation.
 # Includes browser launching, handling UI elements like cookies, buttons, and taking screenshots.
-
 from playwright.sync_api import sync_playwright, Page
 import time
 import os
 #pour simuler le comportement d'un utilisateur réel
-from Config.constants import USER_AGENT
+from Config.constants import USER_AGENT, Context_browser
 import random
 
-def tri():
-    print(random.choice(list(USER_AGENT.values())))
-    print(random.choice(list(USER_AGENT.values())))
-    print(random.choice(list(USER_AGENT.values())))
-    print(random.choice(list(USER_AGENT.values())))
-    print(random.choice(list(USER_AGENT.values())))
-    print(random.choice(list(USER_AGENT.values())))
 
 def launch_browser(headless: bool = True):
     """
@@ -35,14 +27,14 @@ def launch_browser(headless: bool = True):
         )
     context = browser.new_context(
         user_agent=random.choice(list(USER_AGENT.values())) #randomly select an user agent from the predefined list
-        ,viewport={"width": 1920, "height": 1080}
+        ,viewport={"width": Context_browser['width'], "height": Context_browser['height']}
         ,device_scale_factor=2  # Improves screenshot quality on Retina-like displays
-        ,locale="en-US"
-        ,timezone_id="America/Argentina/Buenos_Aires"  # Set timezone for buenos aires
-        ,geolocation={"latitude": -34.6037, "longitude": -58.3816} #geolocation for Buenos Aires
+        ,locale=Context_browser['locale']
+        ,timezone_id=Context_browser['timezone_id']  # Set timezone for buenos aires
+        ,geolocation={"latitude":Context_browser['geolocation_lat'], "longitude": Context_browser['geolocation_lon']} #geolocation for Buenos Aires
         ,permissions=["geolocation"]
         ,java_script_enabled=True
-        ,extra_http_headers={"Accept-Language": "en-US,en;q=0.9"}
+        ,extra_http_headers={"Accept-Language": Context_browser['accept-language']}
 
     )
     page = context.new_page()
@@ -58,7 +50,6 @@ def launch_browser(headless: bool = True):
             get: () => ['en-US', 'en'],
         });
     """)
-
     return playwright, browser, context, page
 
 
@@ -98,7 +89,7 @@ def go_to_url(page: Page, url: str = "https://www.google.com/travel/flights", ti
     """
     try:
         page.goto(url, timeout=timeout)
-        time.sleep(random.uniform(1,3))  # bref délai pour simuler un comportement humain
+        time.sleep(random.uniform(1,3))  # Realistic delay before human actions
     except Exception as e:
         print(f"[❌ Navigation Error] {e}")
 
@@ -109,7 +100,13 @@ def move_mouse_randomly(page: Page):
 
 
 
-
+def trying():
+    print(random.choice(list(USER_AGENT.values())))
+    print(random.choice(list(USER_AGENT.values())))
+    print(random.choice(list(USER_AGENT.values())))
+    print(random.choice(list(USER_AGENT.values())))
+    print(random.choice(list(USER_AGENT.values())))
+    print(random.choice(list(USER_AGENT.values())))
 
 
 

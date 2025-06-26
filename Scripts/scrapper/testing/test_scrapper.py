@@ -1,7 +1,7 @@
 import pandas as pd
-import Scripts.scrapper.modules.scrapper as scrapper
+import Modules.google_flight_scrapping as google_flight_scrapping
 from playwright.sync_api import Page
-from Scripts.scrapper.modules.utils import launch_browser, handle_cookies_popup, go_to_url,tri
+from Modules.scrapping_utils import launch_browser, handle_cookies_popup, go_to_url,tri
 
 def click_departure_date(page: Page):
     try:

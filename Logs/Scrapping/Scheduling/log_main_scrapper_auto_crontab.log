@@ -1,0 +1,25 @@
+Plist unload with success.
+✅ Fichier .plist généré : /Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist
+Succes with the loading of the task.
+Plist unload with success.
+✅ Fichier .plist généré : /Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist
+Succes with the loading of the task.
+Plist unload with success.
+✅ Fichier .plist généré : /Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist
+Succes with the loading of the task.
+Plist unload with success.
+✅ Fichier .plist généré : /Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist
+Succes with the loading of the task.
+Plist unload with success.
+✅ Fichier .plist généré : /Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist
+Succes with the loading of the task.
+⚠️ Error during the unload : Command '['launchctl', 'unload', '/Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist']' returned non-zero exit status 134.
+✅ Fichier .plist généré : /Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist
+⚠️ Erreur pendant le load : Command '['launchctl', 'load', '/Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist']' returned non-zero exit status 134.
+/Users/focus_profond/anaconda3/bin/python3: can't open file '/Users/focus_profond/GIT_repo/flight_price_tracker/main_scrapper_auto.py': [Errno 2] No such file or directory
+Plist unload successfully.
+✅ .plist file generated : /Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist
+Task loaded successfully into launchd.
+Plist unload successfully.
+✅ .plist file generated : /Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist
+Task loaded successfully into launchd.
