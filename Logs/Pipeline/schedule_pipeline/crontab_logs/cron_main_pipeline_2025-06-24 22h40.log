@@ -1,7 +1,0 @@
-2025-06-24 22:40:07,099 — INFO — ▶️ Starting Bronze Layer...
-2025-06-24 22:40:07,099 — ERROR — ❌ An error occurred during pipeline execution
-Traceback (most recent call last):
-  File "/Users/focus_profond/GIT_repo/flight_price_tracker/main_pipeline_auto.py", line 31, in <module>
-    bronze_layer.main()
-    ^^^^^^^^^^^^^^^^^
-AttributeError: module 'Scripts.pipeline.bronze_layer' has no attribute 'main'

@@ -1,0 +1,116 @@
+/Users/focus_profond/GIT_repo/flight_price_tracker/flight_env/bin/python: can't open file '/Users/focus_profond/GIT_repo/flight_price_tracker/main_pipeline_auto.py': [Errno 2] No such file or directory
+▶️ Starting Bronze Layer...
+✅ Bronze Layer completed.
+
+▶️ Starting Silver Layer...
+✅ Silver Layer completed.
+
+▶️ Starting Gold Layer...
+📌 Base utilisée : idle_city
+New data inserted correctly.
+agg_per_date_query executed correctly.
+agg_per_trip_query executed correctly.
+DB closed.
+✅ Gold Layer completed.
+
+🎉 All layers executed successfully.
+▶️ Starting Bronze Layer...
+✅ Bronze Layer completed.
+
+▶️ Starting Silver Layer...
+✅ Silver Layer completed.
+
+▶️ Starting Gold Layer...
+📌 Base utilisée : idle_city
+New data inserted correctly.
+agg_per_date_query executed correctly.
+agg_per_trip_query executed correctly.
+DB closed.
+✅ Gold Layer completed.
+
+🎉 All layers executed successfully.
+ERROR:root:❌ An error occurred during pipeline execution
+Traceback (most recent call last):
+  File "/Users/focus_profond/GIT_repo/flight_price_tracker/Scripts/pipeline/main_pipeline.py", line 40, in <module>
+    log_gold = gold_layer.main()
+               ^^^^^^^^^^^^^^^^^
+  File "/Users/focus_profond/GIT_repo/flight_price_tracker/Scripts/pipeline/gold_layer.py", line 34, in main
+    df_gold = DeltaTable(name_folder).to_pandas()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/focus_profond/GIT_repo/flight_price_tracker/flight_env/lib/python3.12/site-packages/deltalake/table.py", line 420, in __init__
+    self._table = RawDeltaTable(
+                  ^^^^^^^^^^^^^^
+_internal.TableNotFoundError: no log files
+Starting the main pipeline script at 2025-06-27 11:09:02
+▶️ Starting Bronze Layer...
+✅ Bronze Layer completed.
+
+▶️ Starting Silver Layer...
+✅ Silver Layer completed.
+
+▶️ Starting Gold Layer...
+📌 Base utilisée : idle_city
+❌ An error occurred. Check the log for details.
+Starting the main pipeline script at 2025-06-27 12:03:02
+▶️ Starting Bronze Layer...
+✅ Bronze Layer completed.
+
+▶️ Starting Silver Layer...
+✅ Silver Layer completed.
+
+▶️ Starting Gold Layer...
+📌 Base utilisée : idle_city
+New data inserted correctly.
+agg_per_date_query executed correctly.
+agg_per_trip_query executed correctly.
+DB closed.
+✅ Gold Layer completed.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Starting the main pipeline script at 2025-06-27 12:10:01
+▶️ Starting Bronze Layer...
+✅ Bronze Layer completed.
+
+▶️ Starting Silver Layer...
+✅ Silver Layer completed.
+
+▶️ Starting Gold Layer...
+📌 Base utilisée : idle_city
+New data inserted correctly.
+agg_per_date_query executed correctly.
+agg_per_trip_query executed correctly.
+DB closed.
+✅ Gold Layer completed.
+
+ERROR:root:❌ An error occurred during pipeline execution
+Traceback (most recent call last):
+  File "/Users/focus_profond/GIT_repo/flight_price_tracker/Scripts/pipeline/main_pipeline.py", line 35, in <module>
+    log_bronze = bronze_layer.main()
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/Users/focus_profond/GIT_repo/flight_price_tracker/Scripts/pipeline/bronze_layer.py", line 39, in main
+    maxid_bt = max(df_bigtable['id'])
+               ^^^^^^^^^^^^^^^^^^^^^^
+ValueError: max() iterable argument is empty
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Starting the main pipeline script at 2025-06-27 12:20:01
+▶️ Starting Bronze Layer...
+❌ An error occurred. Check the log for details.
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Starting the main pipeline script at 2025-06-27 13:50:02
+▶️ Starting Bronze Layer...
+✅ Bronze Layer completed.
+
+▶️ Starting Silver Layer...
+✅ Silver Layer completed.
+
+▶️ Starting Gold Layer...
+📌 Base utilisée : idle_city
+New data inserted correctly.
+agg_per_date_query executed correctly.
+agg_per_trip_query executed correctly.
+DB closed.
+✅ Gold Layer completed.
+

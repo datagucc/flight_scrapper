@@ -1,0 +1,47 @@
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXThe main pipeline script started at 2025-06-27 12:03:02
+            ----------------------------------------------
+
+            --------- METADATA OF BRONZE LAYER --------------
+
+            Size of the raw big table : 299000 rows.
+
+            Max date of the raw big table : 2025-06-24.
+
+            Max id of the raw big table : 2025-06-24.
+
+            Size of the big table : 299000 rows.
+
+            Max date of the big table : 2025-06-24.
+
+            Max id of the big table : 2025-06-24.
+
+
+            ----------------------------------------------
+
+            --------- METADATA OF SILVER LAYER --------------
+
+            Size of the bronze table : 299000 rows.
+
+            Size of the silver table : 299000 rows.
+
+            Nb of new rows  : 0.
+
+            Nb of price errors : 0.
+
+            Nb of date errors : 0.
+
+
+            ----------------------------------------------
+
+            --------- METADATA OF GOLD LAYER --------------
+
+            Size of the silver table : 299000 rows.
+
+            Max id of the postgresql table before the insertion: 299000.
+
+            Nb of new rows  : 0.
+
+            Size of the gold table after the insertion: 299000 rows.
+
+            
+🎉 All layers executed successfully.

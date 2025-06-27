@@ -1,6 +1,0 @@
-Traceback (most recent call last):
-  File "/Users/focus_profond/GIT_repo/flight_price_tracker/Scripts/scrapper/main_scrapper.py", line 11, in <module>
-    import Scripts.scrapper.modules.scrapper as scrapper
-  File "/Users/focus_profond/GIT_repo/flight_price_tracker/Scripts/scrapper/modules/scrapper.py", line 14, in <module>
-    from playwright.sync_api import Page, PlaywrightTimeoutError
-ImportError: cannot import name 'PlaywrightTimeoutError' from 'playwright.sync_api' (/Users/focus_profond/GIT_repo/flight_price_tracker/flight_env/lib/python3.12/site-packages/playwright/sync_api/__init__.py)

@@ -47,10 +47,10 @@ def request_query(query, cur, type='fetchall'):
         records = cur.fetchall()
     return records
 
-def execute_query(query,cur,conn):
+def execute_query(query,cur,conn, query_name ='No query name'):
     cur.execute(query)
     conn.commit()
-    print('Query executed correctly')
+    print(f'{query_name} executed correctly.')
     return True
 
 def copying_data(df,db_table, cur,conn,db_schema=None):
@@ -59,20 +59,20 @@ def copying_data(df,db_table, cur,conn,db_schema=None):
     buffer.seek(0)
     try: 
         if db_schema != None:
-            copy_query = f"""COPY "{db_schema}".{db_table} ({', '.join(df.columns)}) FROM STDIN WITH CSV"""
+            copy_query = f"""COPY {db_schema}.{db_table} ({', '.join(df.columns)}) FROM STDIN WITH CSV"""
         else:
             copy_query = f"""COPY {db_table} ({', '.join(df.columns)}) FROM STDIN WITH CSV"""
         cur.copy_expert(copy_query, buffer)
         conn.commit()
-        print("new data inserted correctly.")
+        print("New data inserted correctly.")
         return True
     except Exception as e:
-        print(f'error in inserting the data of the DF inside the {db_table}')
+        print(f'Error in inserting the data of the DF inside the {db_table}.')
         raise
 
 
 def closing_connection(conn, cur):
     cur.close()
     conn.close()
-    print("DB closed")
+    print("DB closed.")
     return True

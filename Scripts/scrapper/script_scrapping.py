@@ -33,7 +33,8 @@ start_time = time.time()
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
 print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-print("The main scrapping script starts at", timestamp)
+print("The main scrapping script started at", timestamp)
+
 for row in df.itertuples():
     print(f"Starting the scrapping of {row.trip}")
     #MAIN FUNCTION
@@ -54,4 +55,4 @@ except:
 nb_trip = len(list_dates)
 with open(status_log, "a") as f:
     f.write(f"{timestamp} - {nb_trip} trips - {total_duration} en secondes.\n")
-    print('-----------------------------------------------')
+    f.write('-----------------------------------------------')

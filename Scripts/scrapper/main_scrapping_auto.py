@@ -35,12 +35,12 @@ plist_file_full_path = plist_file_path+plist_name
 
 def generate_random_hour_and_minute():
     """
-    Generate a random time between 12:00 and 16:59.
+    Generate a random time between 12:00 and 15:59.
     Returns:
         tuple: A pair of integers (hour, minute) where hour in[12, 16] and minute in [0, 59].
     """
     
-    hour = random.randint(12, 16)  # de 12h à 16h (inclus)
+    hour = random.randint(12, 15)  # de 12h à 16h (inclus)
     minute = random.randint(0, 59)
     return hour, minute
 
@@ -88,7 +88,7 @@ def generate_plist(hour, minute,project_path, virtual_env_path, script_path, log
     with open(plist_file_full_path, "wb") as f:
         plistlib.dump(plist_dict, f)
     
-    print(f"✅ .plist file generated : {plist_file_full_path} ; ")
+    print(f"File .plist  generated : {plist_file_full_path} ; ")
 
 def unloading_plist(plist_name= plist_file_full_path):
     """
@@ -155,8 +155,8 @@ def log_execution_status(success: bool, message: str):
 
 def main():
     hour,minute= generate_random_hour_and_minute()
-    minute = 32
-    hour = 21
+    #minute = 25
+    #hour = 22
     unloading_plist(plist_file_full_path)
     generate_plist(hour, minute,project_path,virtual_env_path,script_path,log_path)
     loading_plist(plist_file_full_path) 

@@ -4,13 +4,12 @@ import os
 import shutil
 #import time
 import pandas as pd
-#test OCR
 import pytesseract
 import cv2
 import csv
 import time
-from PIL import Image
-import numpy as np
+#from PIL import Image
+#import numpy as np
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 #import calendar
@@ -19,7 +18,6 @@ from deltalake.table import TableOptimizer
 from deltalake.exceptions import TableNotFoundError
 import re
 import logging
-
 from Config.constants import PATH
 root_dir = PATH['main_path']
 log_path = PATH['logs_path']
@@ -28,16 +26,99 @@ if root_dir not in sys.path:
 #sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 from Modules.DF_functions import *
 
+"""
+#Pour voir quel pytesseract est utilisé :
+#  Pytesseract est un wrapper pour Tesseract OCR, qui est un moteur de reconnaissance optique de caractères (OCR) open source.
+# Cela signifie que Pytesseract fait appel à tesseract en arrière plan pour effectuer l'OCR. 
+# De son coté, tesseract est un logiciel indépendant qui doit etre installé sur mon systeme (via Brew par exemple).
+# Et donc Tesseract n'est pas un module Python mais un programme externe que le module Pytesseract appelle.
+#import pytesseract
+#print("Tesseract utilisé :", pytesseract.pytesseract.tesseract_cmd)
+# Erreur que j'ai eu : Tesseract is not installed or it's not in your PATH
+# On sait que pytesseract est installé (effectivement lorsqu'on fait pip show pytesseract quand on est dans l'env virtuel, on voit qu'il est installé)
+# Donc cela veut dire que l'erreur est lié au binaire TESSERACT. 
+# On sait que Tesseract est installé donc cela veut dire que l'erreur vient du path : il n'est pas trouvé par pytesseract.
+# Pour corriger cela, on doit spécifier le chemin du binaire Tesseract + #forcing manually the path to Tesseract
+os.environ["LANG"] = "en_US.UTF-8"
+os.environ["LC_ALL"] = "en_US.UTF-8"
+pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
+os.environ["PATH"] += os.pathsep + "/opt/homebrew/bin"
+import subprocess
+tess_path = pytesseract.pytesseract.tesseract_cmd
+# Debug info
+with open("/Users/focus_profond/GIT_repo/flight_price_tracker/Logs/OCR/Scheduling/ocr_debug.log", "a") as f:
+    f.write("==== NOUVELLE EXECUTION ====\n")
+    f.write(f"TESSERACT_CMD: {pytesseract.pytesseract.tesseract_cmd}\n")
+    f.write(f"PATH: {os.environ['PATH']}\n")
+        # Test subprocess brut
+    try:
+        version_output = subprocess.check_output([tess_path, "--version"], stderr=subprocess.STDOUT)
+        f.write("✅ Subprocess fonctionne ! Version :\n")
+        f.write(version_output.decode("utf-8"))
+    except Exception as e:
+        f.write(f"❌ Subprocess échoue : {str(e)}\n")
+"""
+#MALGRE TOUTES LES PRECAUTIONS, IL SEMBLE QUE J AI TOUJOURS L ERREUR. IL SEMBLERAIT QUE CA VIENNE DE LA GESITON DES FICHIERS TEMPORAIRES PAR PYTESSERACT.
+# POUR CELA, JE VAIS MOI-MEME GERER LES FICHIERS TEMPORAIRES
+pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"
+os.environ["PATH"] += os.pathsep + "/opt/homebrew/bin"
 
+# 1) Create a temporary directory
+TEMP_OCR_DIR = "/Users/focus_profond/GIT_repo/flight_price_tracker/Data/temp/tmp_ocr"
+os.makedirs(TEMP_OCR_DIR, exist_ok=True)
 
+# 2) Create a personnalised function to replace pytesseract.image_to_string
+import uuid
+import subprocess
+import cv2
 
+def custom_image_to_string(cell_img, config='', lang='eng'):
+    # Génère un nom unique
+    unique_id = str(uuid.uuid4())
+    input_path = os.path.join(TEMP_OCR_DIR, f"{unique_id}.png")
+    output_base = os.path.join(TEMP_OCR_DIR, f"{unique_id}")
+    output_txt = f"{output_base}.txt"
 
+    # Sauvegarde l’image
+    cv2.imwrite(input_path, cell_img)
 
-# Configuration basique du log (fichier, format, niveau)
-#logging.basicConfig(filename='/Users/focus_profond/GIT_repo/flight_price_tracker/Logs/OCR/ocr_errors.log',
- #                   filemode='a',
-  #                  format='%(asctime)s - %(levelname)s - %(message)s',
-   #                 level=logging.ERROR)
+    try:
+        # Appel à tesseract
+        cmd = [
+            pytesseract.pytesseract.tesseract_cmd,
+            input_path,
+            output_base,
+            '--psm', '6',
+            '-l', lang
+        ]
+        if config:
+            cmd += config.split()
+
+        subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        # Lecture du résultat
+        if os.path.exists(output_txt):
+            with open(output_txt, 'r', encoding='utf-8') as f:
+                return f.read().strip()
+        else:
+            return ""
+
+    finally:
+        # Nettoyage des fichiers temporaires
+        for path in [input_path, output_txt]:
+            try:
+                if os.path.exists(path):
+                    os.remove(path)
+            except Exception:
+                pass
+# ensuite je peux simplement remplacer l'appel de pytsseract par ma fonction : text = custom_image_to_string(cell_img, config=config)
+
+# ANALYSIS OF EXECUTION TIME BEWTEEN THE 2 SOLUTIONS, with one date and 2 trips (so 2 folders)
+# using my own function, running on VSCode : 59.31
+# using my own function, running on cron : 112 secondes
+# using pytesseract.image_to_string, running on VSCode : 59.47
+# using pytesseract.image_to_string, running on cront :
+
 
 def ocr_individual_cells_errors(image_path, image_name, rows=5, cols=7, config='--psm 6'):
     """
@@ -117,7 +198,10 @@ def ocr_individual_cells_errors(image_path, image_name, rows=5, cols=7, config='
                     y2 = (r + 1) * cell_h
 
                     cell_img = img[y1:y2, x1:x2]
-                    text = pytesseract.image_to_string(cell_img, config=config).strip()
+                    #text = pytesseract.image_to_string(cell_img, config=config).strip()
+                    text = custom_image_to_string(cell_img, config=config)
+
+                    #print("TYPE OF TEXT : ",type(text), " ; TEXT : ",text)
 
                     if text != '':
                         separateur = text.split('\n')
@@ -177,7 +261,7 @@ def ocr_individual_cells_errors(image_path, image_name, rows=5, cols=7, config='
         if is_error == False:
             errors={}
 
-
+        #print(my_df.info())
         return (my_df,errors)
 
     except Exception as e:
@@ -194,6 +278,15 @@ def ocr_individual_cells_errors(image_path, image_name, rows=5, cols=7, config='
 # OCR sur un dossier entier
 
 def ocr_on_folder(folder_path, trip, date):
+    """ Perform OCR on all images in a specified folder and log the results.
+    Args:
+        folder_path (str): Path to the folder containing images.
+        trip (str): Trip identifier.
+        date (str): Date of the trip in 'YYYY-MM-DD' format.
+    Returns:
+        pd.DataFrame: A DataFrame containing the OCR results for all images in the folder.
+    """
+
     date_obj = datetime.now()
     current_date_full = date_obj.strftime("%Y-%m-%d")
     start_time = time.time()
@@ -219,20 +312,28 @@ def ocr_on_folder(folder_path, trip, date):
 
 
     big_df = pd.DataFrame({})
-    print(f'starting OCR on folder : {folder_path}')
+    print(f'📁 Starting OCR on folder : {folder_path}')
+    has_errors = False
     for name in names:
-        print('starting the OCR of the file :',name)
+        print('Starting the OCR of the file :',name)
         # first we want the df of the OCR results and second, we want the dictionnary of the errors.
         df, dict_errors = ocr_individual_cells_errors(folder_path,name)
+        msg = 'with no errors.'
         if dict_errors:
             log_data["errors"].append({
                     "file_name": name,
                     "dict_error": dict_errors
                 })
+            msg= "with errors. ⚠️"
+            has_errors = True
+
         big_df = pd.concat([big_df,df], ignore_index=True, sort=False)
        # print('ending of the loading of the file')
-    print(f'ending OCR on folder : {folder_path}')
-    log_data["status"] = "success"
+    print(f'Ending OCR on folder : {folder_path}, {msg}')
+    if has_errors:
+        log_data["status"] = "failure"
+    else :
+        log_data["status"] = "success"
     #print(f'longueur du df : {len(big_df)}')
 
     #storing the logs
@@ -260,7 +361,7 @@ def ocr_on_folder(folder_path, trip, date):
                 errors_str,
                 log_data["path"]
             ])
-    print(f"✅ Log saved in {log_path}")
+    print(f"Log saved in {log_path}")
 
 
 
@@ -272,11 +373,22 @@ def ocr_on_folder(folder_path, trip, date):
 #améliorer cette fonction pour qu'elle soit plus dynamique 
 #def storing_data(df, directory='/Users/focus_profond/GIT_repo/IDLE_CITY_PROJECT/Accessibility', source = 'screenshots', author = 'Augustin'):
 def storing_data(df, name_folder_desti="/Data/raw/BigTable", source = 'screenshots', author = 'Augustin'):
-    
-    main_directory = '/Users/focus_profond/GIT_repo/flight_price_tracker'
+    """
+    Store the DataFrame in a Delta Lake format in the specified directory.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to store.
+        name_folder_desti (str): The destination folder path where the Delta Lake table will be saved.
+        source (str): The source of the data (e.g., 'screenshots'). 
+        author (str): The author of the data (e.g., 'Augustin').
+    Returns:
+        None
+    """
+    #main_directory = '/Users/focus_profond/GIT_repo/flight_price_tracker'
+    main_directory=root_dir
     os.chdir(main_directory)
     name_folder = main_directory+ name_folder_desti
-    print(name_folder)
+    #print(name_folder)
     partition_cols = None
     predicate = "target.flight_date = source.flight_date AND target.trip = source.trip AND target.date_of_search = source.date_of_search"
 
