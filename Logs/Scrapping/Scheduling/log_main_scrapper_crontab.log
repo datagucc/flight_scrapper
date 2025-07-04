@@ -2,3 +2,18 @@ Plist unload successfully ;
 File .plist  generated : /Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist ; 
 ✅Task loaded successfully into launchd.
 --------------------------------------------------
+Plist unload successfully ;
+File .plist  generated : /Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist ; 
+✅Task loaded successfully into launchd.
+--------------------------------------------------
+Plist unload successfully ;
+File .plist  generated : /Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist ; 
+✅Task loaded successfully into launchd.
+--------------------------------------------------
+⚠️ Error during the unload : Command '['launchctl', 'unload', '/Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist']' returned non-zero exit status 134.
+File .plist  generated : /Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist ; 
+⚠️ Error during load : Command '['launchctl', 'load', '/Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist']' returned non-zero exit status 134.
+Plist unload successfully ;
+File .plist  generated : /Users/focus_profond/Library/LaunchAgents/com.user.main_scrapper_daily.plist ; 
+✅Task loaded successfully into launchd.
+--------------------------------------------------

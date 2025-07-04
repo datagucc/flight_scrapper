@@ -269,21 +269,20 @@ def scrapping_url(
             log_data["errors"].append({"phase": "click_departure_date", "error": str(e)})
             is_second_try = True
             raise
-        
-
-        # This step often fails. Reloading the browser or page might help.
-        # We retry the entire sequence: new browser → new page → click again
-        if is_second_try:
-            try:
-                browser.close()
-                playwright.stop()
-                playwright, browser, context, page = launch_browser(headless=headless)
-                go_to_url(page, url)
-                click_departure_date(page)
-                log_data["errors"].append({"phase":"second_click_departure WORKING", "error": "none"})
-            except Exception as e:
-                log_data["errors"].append({"phase": "second_click_departure_date", "error": str(e)})
-                raise
+        finally:  #that way, we can retry the click if it fails.
+            # This step often fails. Reloading the browser or page might help.
+            # We retry the entire sequence: new browser → new page → click again
+            if is_second_try:
+                try:
+                    browser.close()
+                    playwright.stop()
+                    playwright, browser, context, page = launch_browser(headless=headless)
+                    go_to_url(page, url)
+                    click_departure_date(page)
+                    log_data["errors"].append({"phase":"second_click_departure WORKING", "error": "none"})
+                except Exception as e:
+                    log_data["errors"].append({"phase": "second_click_departure_date", "error": str(e)})
+                    raise
 
         # PHASE 4: MONTH LOOP — max 32 seconds per loop, ~360s total for 12 months
         for i in range(month_to_capture):

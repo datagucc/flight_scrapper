@@ -118,6 +118,7 @@ print('duration par jour : ', time_per_days)
 status_log =  log_path+'/OCR/Scheduling/main_ocr.log'   
 timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 with open(status_log, "a") as f:
+    f.write("--------------------------------------------------------------------------")
     f.write(f"{timestamp} - {len(days_to_extract)} days - {total_nb_trip} folders processed in - {total_duration} in secondes - last day processed : {final_date}.\n")
-    f.write(f"{time_per_days}")
+    f.write(f"Dict of time duration per days : {time_per_days}.\n")
 

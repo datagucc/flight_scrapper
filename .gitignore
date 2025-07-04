@@ -2,6 +2,7 @@
 /Exploration
 /flight_env
 /Scripts/pipeline/creating_tables.ipynb
+/Scripts/pipeline/creation_tables
 /Scripts/pipeline/gold_layer.py
 /Config/pipeline.conf
 /Logs/Scrapping/Screenshots/

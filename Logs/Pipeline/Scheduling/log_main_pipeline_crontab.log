@@ -114,3 +114,72 @@ agg_per_trip_query executed correctly.
 DB closed.
 ✅ Gold Layer completed.
 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Starting the main pipeline script at 2025-06-30 09:30:02
+▶️ Starting Bronze Layer...
+✅ Bronze Layer completed.
+
+▶️ Starting Silver Layer...
+✅ Silver Layer completed.
+
+▶️ Starting Gold Layer...
+📌 Base utilisée : idle_city
+New data inserted correctly.
+agg_per_date_query executed correctly.
+agg_per_trip_query executed correctly.
+DB closed.
+✅ Gold Layer completed.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Starting the main pipeline script at 2025-07-01 09:30:03
+▶️ Starting Bronze Layer...
+✅ Bronze Layer completed.
+
+▶️ Starting Silver Layer...
+✅ Silver Layer completed.
+
+▶️ Starting Gold Layer...
+📌 Base utilisée : idle_city
+New data inserted correctly.
+agg_per_date_query executed correctly.
+agg_per_trip_query executed correctly.
+DB closed.
+✅ Gold Layer completed.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Starting the main pipeline script at 2025-07-03 09:30:02
+▶️ Starting Bronze Layer...
+✅ Bronze Layer completed.
+
+▶️ Starting Silver Layer...
+✅ Silver Layer completed.
+
+▶️ Starting Gold Layer...
+📌 Base utilisée : idle_city
+New data inserted correctly.
+agg_per_date_query executed correctly.
+agg_per_trip_query executed correctly.
+DB closed.
+✅ Gold Layer completed.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Starting the main pipeline script at 2025-07-04 09:30:02
+▶️ Starting Bronze Layer...
+✅ Bronze Layer completed.
+
+▶️ Starting Silver Layer...
+✅ Silver Layer completed.
+
+▶️ Starting Gold Layer...
+📌 Base utilisée : idle_city
+New data inserted correctly.
+New data inserted correctly.
+agg_per_date_query executed correctly.
+agg_per_trip_query executed correctly.
+DB closed.
+✅ Gold Layer completed.
+

@@ -21,8 +21,10 @@ import Modules.google_flight_scrapping as google_flight_scrapping
 
 
 # Open excel file where the URL and trip are stored
-excel_path = f'{config_dir}/trip_config.xlsx'
-df = pd.read_excel(excel_path, sheet_name='good_one')
+excel_path = f'{data_path}/dim_files/all_dim.xlsx'
+#csv_path =f'{config_dir}/trip_config_world.csv'
+df = pd.read_excel(excel_path, sheet_name='dim_trip')
+#df = pd.read_csv(csv_path, encoding='utf-8')
 
 # Drop the raw where there is no URL  +  filter to keep only url and trip columns
 df= df.dropna(subset=['url'])

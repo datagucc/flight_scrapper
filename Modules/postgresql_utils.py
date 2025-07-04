@@ -64,11 +64,12 @@ def copying_data(df,db_table, cur,conn,db_schema=None):
             copy_query = f"""COPY {db_table} ({', '.join(df.columns)}) FROM STDIN WITH CSV"""
         cur.copy_expert(copy_query, buffer)
         conn.commit()
-        print("New data inserted correctly.")
+        print(f"New data inserted correctly in the {db_table} table.")
         return True
     except Exception as e:
-        print(f'Error in inserting the data of the DF inside the {db_table}.')
-        raise
+        print(f'Error in inserting the data of the DF inside the {db_table}. Error : {e}')
+        
+        raise e 
 
 
 def closing_connection(conn, cur):
